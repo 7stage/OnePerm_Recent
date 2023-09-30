@@ -1,0 +1,5 @@
+com/songro/oneperm/cmd/GivePermission2Player.class
+com/songro/oneperm/events/ChangePrefixPlayerName.class
+com/songro/oneperm/events/CheckIfPlayerOnVoidBlk.class
+com/songro/oneperm/cmd/CstbanPlayer.class
+com/songro/oneperm/OnePerm.class

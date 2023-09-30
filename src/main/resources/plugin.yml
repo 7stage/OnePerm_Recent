@@ -1,0 +1,75 @@
+name: OnePerm
+version: '${project.version}'
+main: com.songro.oneperm.OnePerm
+api-version: '1.20'
+prefix: [ONEPERM]
+load: STARTUP
+authors: [notSongro_]
+description: 한개의 플러그인에서 모든 권한을
+website: https://docs.songro.kro.kr
+
+commands:
+  giveperm:
+    usage: /<command> <User> (default/op/cop/firefighter/law/school/broadcast)
+    description: 플레이어에게 권한을 부여합니다.
+    aliases: [giveperm, 권한제공, gp]
+  banplayer:
+    usage: /<command> <User> <Reason>
+
+permissions:
+  role.*:
+    description: default role
+    role.default: true
+    role.op: op
+    role.cop: false
+    role.mafia: false
+    role.fire: false
+    role.guide: false
+    role.law: false
+    role.schoolmanage: false
+    role.broadcast: false
+    role.student: false
+
+  role.default:
+    description: default user role
+    default: true
+
+  role.op:
+    description: op user role
+    default: op
+
+  role.cop:
+    description: cop user role
+    default: false
+
+  role.mafia:
+    description: mafia user role
+    default: false
+    
+  role.fire:
+    description: firefighter user role
+    default: false
+  
+  role.guide:
+    description: guide user role
+    default: false
+
+  role.law:
+    description: lawyer user role
+    default: false
+
+  role.broadcast:
+    description: broadcase user role
+    default: false
+
+  role.broooothisisjusttesting:
+    description: testing
+    default: false
+
+  role.schoolmanage:
+    description: school management
+    default: false
+
+  role.student:
+    description: student user role
+    default: false
