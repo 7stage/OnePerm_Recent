@@ -2,53 +2,178 @@ name: OnePerm
 version: '${project.version}'
 main: com.songro.oneperm.OnePerm
 api-version: '1.20'
-prefix: [ONEPERM]
+prefix: ONEPERM
 load: STARTUP
-authors: [notSongro_]
+authors: ['DONT PAN!C STUDIOS']
 description: 한개의 플러그인에서 모든 권한을
-website: https://docs.songro.kro.kr
+website: https://studio.dontpanic.kro.kr/what-we-made-html
+depend: [Citizens, Vault]
+loadbefore: [Vault, VaultEvents]
 
 commands:
-  giveperm:
-    usage: /<command> <User> (default/op/cop/firefighter/law/school/broadcast)
-    description: 플레이어에게 권한을 부여합니다.
-    aliases: [giveperm, 권한제공, gp]
-  banplayer:
-    usage: /<command> <User> <Reason>
+  reloadconfiguration:
+    usage: /<command>
+    description: 설정을 리로드합니다.
+    aliases: [r, rl, rc, 리로드]
+  version:
+    usage: /<command>
+    description: 버전 확인
+    aliases: [v, 버전, ov]
+  qmessage:
+    usage: /<command> (Player) <Message>
+    description: 특정 플레이어에게 메세지를 보냅니다.
+    aliases: [msg, 메세지, ㅁ]
+  giveallcstitem:
+    usage: /<command>
+    description: 모든 역할 아이템을 불러옵니다.
+  rmp:
+    usage: /<command> (Player)
+    description: only for console
+  removeallpermission:
+    usage: /<command> (Player)
+    description: 선택한 플레이어의 모든 권한을 삭제합니다.
+    aliases: [rap, 권한삭제, 권삭]
+  givecstitem:
+    usage: /<command>
+    description: 플러그인에 있는 모든 커스텀 아이템을 GUI형식으로 보여줍니다.
+    aliases: [gst, 커스텀아이템]
+  smf:
+    usage: /<command>
+    description: none
+  smt:
+    usage: /<command>
+    description: none
+  genterrornpc:
+    usage: /<command>
+    description: 자신의 위치에 테러를 시작할수 있는 NPC를 설치합니다.
+  deposit:
+    usage: /<command> (Player) <Amount>
+    description: 특정 플레이어에게 돈을 지급합니다.
+    aliases: [depo, dep]
+  depositplayer:
+    usage: /<command> (Player) <Amount>
+    description: 특정 플레이어에게 돈을 입금합니다.
+    aliases: [입금, depos, dp]
+  removemoney:
+    usage: /<command> (Player) <Amount>
+    description: 특정 플레이어의 돈을 빼았습니다.
+    aliases: [돈제거, rm, rmoney]
+  resetbank:
+    usage: /<command> (Player)
+    description: 특정 플레이어의 계좌를 초기화합니다.
+    aliases: [계좌초기화, rsb, rsbank]
+  police:
+    usage: /<command> <채용/확성기/삭제> (플레이어/내용)
+    description: 경찰총장이 사용할수 있는 명령어 입니다.
+    aliases: [경찰, 경찰청, ㄱㅊ, ㄱㅊㅊ, po, pc]
+  treasury:
+    usage: /<command>
+    description: 국고를 확인합니다.
+    aliases: [국고]
+  savechunk:
+    usage: /<command>
+    description: 청크 변경을 확인할 엔티티를 생성합니다.
+  createbank:
+    usage: /<command>
+    description: 계좌 생성을 신청합니다.
+    aliases: [cb, 계좌생성]
+  bankinfo:
+    usage: /<command>
+    description: 계좌 정보를 표시합니다.
+    aliases: [계좌, 계좌정보, bi]
+  bankaccept:
+    usage: /<command>
+    description: 플레이어의 계좌 신청을 승인합니다.
 
 permissions:
+  def.*:
+    description: non usr role
+    def.default: true
+    def.canChangeRole: false
+
+  def.default:
+    description: default role
+    default: true
+
+  def.canChangeRole:
+    description: can change user role
+    default: true
+
   role.*:
     description: default role
-    role.default: true
-    role.op: op
-    role.cop: false
-    role.mafia: false
-    role.fire: false
-    role.guide: false
-    role.law: false
-    role.schoolmanage: false
-    role.broadcast: false
-    role.student: false
+    role.default: false # 시민
+    role.op: false # 관리자 전용
+    role.cop: false # 경찰 - 부직업 포함
+    role.mafia: false # 마피아 - 부직업 포함
+    role.fire: false # 소방관 - 부직업 포함
+    role.guide: false # 가이드
+    role.law: false # 법원 - 부직업 포함
+    role.broadcast: false # 방송 - 부직업 포함
+    role.student: true # 학생 - 기본 직업
+    role.prosector: false # 검찰 - 부직업 포함
+    role.cityhall: false # 시청
+    role.execution: false # 집행 - 부직업 포함
+    role.election: false # 선거 - 부직업 포함
+    role.colleage: false # 대학교
+    role.bank: false # 은행
 
   role.default:
     description: default user role
-    default: true
+    default: false
 
   role.op:
-    description: op user role
+    description: op role
     default: op
 
   role.cop:
     description: cop user role
     default: false
+    children:
+      role.cop.cheif: # 경찰청장
+        default: false
+      role.cop.superintendent: # 치안총감
+        default: false
+      role.cop.sensesecurity: #치안정감
+        default: false
+      role.cop.intendent: # 총경
+        default: false
+      role.cop.alleviation: # 경감
+        default: false
+      role.cop.boat: # 겨엊ㅇㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+        default: false
+      role.cop.inspector: # 경위
+        default: false
+      role.cop.lightsuit: # 경장ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+        description: tf?
+        default: false
+      role.cop.cop: # 순경
+        default: true
 
   role.mafia:
     description: mafia user role
     default: false
+    children:
+      role.mafia.boss: # 보스
+        default: false
+      role.mafia.deputyboss: # 부보스
+        default: false
+      role.mafia.cadre: # 간부
+        default: false
+      role.mafia.mafia: # 마피아
+        default: false
+      role.mafia.mafiasibo: # 마피아 시보
+        default: true
     
   role.fire:
     description: firefighter user role
     default: false
+    children:
+      role.fire.cheif: # 소방청장
+        default: false
+      role.fire.leader: # 소방팀장
+        default: false
+      role.fire.fighter: # 소방관
+        default: true
   
   role.guide:
     description: guide user role
@@ -57,19 +182,100 @@ permissions:
   role.law:
     description: lawyer user role
     default: false
+    children:
+      role.law.chiefjustice: # 대법원장
+        default: false
+      role.law.chancellor: # 대법관
+        default: false
+      role.law.cheifjudge: # 부장판사 = 수석판사
+        default: false
+      role.law.reputable: # 평판사
+        default: false
+      role.law.judgepoetry: # 판사 시보
+        default: true
 
   role.broadcast:
     description: broadcase user role
     default: false
-
-  role.broooothisisjusttesting:
-    description: testing
-    default: false
-
-  role.schoolmanage:
-    description: school management
-    default: false
+    children:
+      role.broadcast.leader: # 원장
+        default: false
+      role.broadcast.deputyleader: # 부원장
+        default: false
+      role.broadcast.director: # 부장
+        default: false
+      role.broadcast.conductor: # 차장
+        default: false
+      role.broadcast.headsection: # 과장
+        default: false
+      role.broadcast.surrogate: # 대리
+        default: false
+      role.broadcast.cheif: # 주임
+        default: false
+      role.broadcast.employee: # 사원
+        default: true
 
   role.student:
     description: student user role
+    default: true
+
+  role.prosector:
+    description: 검찰청 user role
     default: false
+    children:
+      role.prosector.general: # 검찰 총장
+        default: false
+      role.prosector.cheifinspection: # 검사장
+        default: false
+      role.prosector.chief: # 부장검사
+        default: false
+      role.prosector.deputychief: # 부부장검사
+        default: false
+      role.prosector.audit: # 검사
+        default: false
+      role.prosector.inspection: # 검사시보
+        default: true
+
+  role.colleage: # 대학교
+    description: collage user role
+    default: false
+    children:
+      role.colleage.leader: # 대학교장
+        default: false
+      role.colleage.student: # 대학교원
+        default: true
+
+  role.audit:
+    description: audit user role
+    default: false
+    children:
+      role.audit.leader:
+        default: false
+      role.audit.second:
+        default: false
+
+  role.cityhall: # 시청
+    description: city hall user role
+    default: false
+
+  role.execution:
+    description: executioncommittee user role
+    default: false
+    children:
+      role.execution.chairmen: # 집행위원장
+        default: false
+      role.execution.committee: # 집행위원회
+        default: true
+
+  role.election:
+    description: election manager user role
+    default: false
+
+  role.bank:
+    description: bank user role
+    default: false
+    children:
+      role.bank.president:
+        default: false
+      role.bank.plan:
+        default: false

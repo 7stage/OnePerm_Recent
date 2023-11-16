@@ -1,0 +1,8 @@
+  chkwarn:
+    usage: /<command>
+    description: 경고를 확인합니다.
+    aliases: [checkwarn, 경고확인, 경확, ㄱㅎ]
+  warnplayer:
+    usage: /<command> (Player)
+    description: 경고를 확인합니다.
+    aliases: [checkwarn, 경고확인, 경확, ㄱㅎ]
