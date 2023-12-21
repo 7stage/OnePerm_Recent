@@ -26,7 +26,7 @@ public class CreateBankDataGUI implements CommandExecutor {
 
 
         for (Player plr : Bukkit.getServer().getOnlinePlayers()) {
-            if(OnePerm.plugin.getBankCreateData().getString(plr.getName()) != null) {
+            if(OnePerm.plugin.getBankCreateData().getString(plr.getName()) != null && OnePerm.plugin.getBankCreateData().getBoolean(plr.getName() + ".askedcreation")) {
                 ItemStack i = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (short) 3);
                 SkullMeta im = (SkullMeta) i.getItemMeta();
 

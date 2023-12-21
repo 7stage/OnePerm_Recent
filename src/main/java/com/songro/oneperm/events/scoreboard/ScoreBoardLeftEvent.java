@@ -1,22 +1,18 @@
-package com.songro.oneperm.events;
+package com.songro.oneperm.events.scoreboard;
 
 import com.songro.oneperm.OnePerm;
 import com.songro.oneperm.task.ChkPlayerPerm;
-import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -37,7 +33,9 @@ public class ScoreBoardLeftEvent implements Listener {
         boards.put(p.getUniqueId(), board);
 
         OnePerm.plugin.getServer().getScheduler().runTaskTimer(OnePerm.plugin, () -> {
-            updateScoreboard(p, board);
+            for(Player player : Bukkit.getOnlinePlayers()) {
+                updateScoreboard(player, board);
+            }
         }, 0, 20);
 
         log.info("added sidebar.");

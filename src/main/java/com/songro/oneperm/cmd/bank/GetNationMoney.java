@@ -1,4 +1,4 @@
-package com.songro.oneperm.cmd;
+package com.songro.oneperm.cmd.bank;
 
 import com.songro.oneperm.OnePerm;
 import org.bukkit.ChatColor;

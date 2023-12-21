@@ -1,4 +1,4 @@
-package com.songro.oneperm.cmd;
+package com.songro.oneperm.cmd.bank;
 
 import com.songro.oneperm.OnePerm;
 import org.bukkit.Bukkit;
@@ -30,14 +30,18 @@ public class CreateBank implements CommandExecutor {
             if(OnePerm.plugin.getBankCreateData().getBoolean(p.getName() + ".askedcreation") == true) {
                 p.sendMessage(ChatColor.YELLOW + "[ONEPERM] 이미 계좌 생성을 신청했습니다.");
                 return true;
-            }
+            } else if (OnePerm.plugin.getBankCreateData().getBoolean(p.getName() + ".data.iscreated") == true ) {
+                p.sendMessage(ChatColor.YELLOW + "[ONEPERM] 이미 계좌가 생성되었습니다.");
+            } else {
                 p.sendMessage(ChatColor.GREEN + "[ONEPERM] 은행원에게 계좌 생성을 신청했습니다.");
                 p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 9, 1);
                 Bukkit.broadcast(ChatColor.GOLD + "[ONEPERM] " + p.getName() + "님이 계좌 신청을 하였습니다, 확인해주시길 바랍니다.", "role.bank");
                 OnePerm.plugin.getBankCreateData().set(p.getName() + ".askedcreation", true);
                 OnePerm.plugin.getBankCreateData().set(p.getName() + ".data.date", curDate);
                 OnePerm.plugin.getBankCreateData().set(p.getName() + ".data.name", p.getName());
+                OnePerm.plugin.getBankCreateData().set(p.getName() + ".data.iscreated", false);
                 OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
+            }
         } catch (Exception e) {
             p.sendMessage(ChatColor.RED + "[ONEPERM] 데이터를 저장중 오류가 발생했습니다.\n[ONEPERM] " + e.getMessage());
         }

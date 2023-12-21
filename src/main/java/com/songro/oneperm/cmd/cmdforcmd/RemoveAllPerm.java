@@ -18,10 +18,12 @@ public class RemoveAllPerm implements CommandExecutor {
             if (strings.length == 1) {
                 Player target = Bukkit.getPlayer(strings[0]);
                 try {
+                    assert target != null;
+
                     if (target.isOp()) {
                         player.sendMessage( ChatColor.YELLOW + "[ONEPERM] 해당 플레이어는 관리자입니다.");
                     }
-                    assert target != null;
+
                     target.addAttachment(OnePerm.plugin, "role.cop", false);
                     target.addAttachment(OnePerm.plugin, "role.student", false);
                     target.addAttachment(OnePerm.plugin, "role.mafia", false);

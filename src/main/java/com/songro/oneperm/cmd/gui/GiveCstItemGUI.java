@@ -4,6 +4,8 @@ import com.songro.oneperm.item.CopBulletProof;
 import com.songro.oneperm.item.CopCustomItem;
 import com.songro.oneperm.item.weapon.C4;
 import com.songro.oneperm.item.weapon.Grenade;
+import com.songro.oneperm.recipe.drug.cocaine;
+import com.songro.oneperm.recipe.drug.heroine;
 import com.songro.oneperm.recipe.drug.weed;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,6 +48,8 @@ public class GiveCstItemGUI implements CommandExecutor {
                 cstItemGUI.setItem(19, new Grenade().returnGrenade());
                 cstItemGUI.setItem(20, new C4().returnC4());
                 cstItemGUI.setItem(28, new weed().weedItem());
+                cstItemGUI.setItem(29, new cocaine().cocaineitem());
+                cstItemGUI.setItem(30, new heroine().heroineitem());
                 cstItemGUI.setItem(17, nonItem);
                 cstItemGUI.setItem(18, nonItem);
                 cstItemGUI.setItem(26, nonItem);

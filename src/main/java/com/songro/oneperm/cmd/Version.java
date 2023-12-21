@@ -11,7 +11,7 @@ public class Version implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player)commandSender;
-        player.sendMessage( ChatColor.GREEN + "[ONEPERM] OnePerm - v1.8\n[ONEPERM] Made by. notSongro_\n[ONEPERM] OnePerm 플러그인은 WeaponMechanicsAPI, Spigot API, Vault, MechanicsCore 그리고 Spigot API를 사용합니다.");
+        player.sendMessage( ChatColor.GREEN + "[ONEPERM] OnePerm - v1.9 BETA\n[ONEPERM] Made by. DONT PAN!C STUDIOS\n[ONEPERM] OnePerm 플러그인은 WeaponMechanicsAPI, Spigot API, Vault, MechanicsCore 그리고 Spigot API를 사용합니다.");
         return true;
     }
 }

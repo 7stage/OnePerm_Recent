@@ -40,7 +40,6 @@ import static com.songro.oneperm.OnePerm.plugin;
 public class weed {
 
     public ItemStack weedItem() {
-        Logger log = Bukkit.getLogger();
 
         ItemStack weed = new ItemStack(Material.SUGAR, 1);
         ItemMeta weedMeta = weed.getItemMeta();
@@ -50,7 +49,7 @@ public class weed {
         ArrayList<String> weedLore = new ArrayList<>();
         weedLore.add(ChatColor.GOLD + "정신건강에 좋진 않지만, 단기간에 회복을 할수 있다.");
         weedLore.add("");
-        weedLore.add(ChatColor.GOLD + "[ 우클릭 시: 회복 효과 (15초) ]");
+        weedLore.add(ChatColor.GOLD + "[ 우클릭 시: 회복 효과 (15초) +  " + ChatColor.GRAY + "???" + ChatColor.GOLD + " ]");
         weedLore.add(ChatColor.GOLD + "[ 등급: " + ChatColor.RED + "위험" + ChatColor.GOLD + " ]");
 
         weedMeta.setLore(weedLore);
@@ -69,7 +68,7 @@ public class weed {
             ShapedRecipe recipe = new ShapedRecipe(key, new weed().weedItem());
             recipe.shape("ASA", "SZS", "ASA");
             recipe.setIngredient('A', Material.AIR);
-            recipe.setIngredient('Z', Material.SUGAR);
+            recipe.setIngredient('Z', Material.JUNGLE_LEAVES);
             recipe.setIngredient('S', Material.OAK_LEAVES);
 
             Bukkit.addRecipe(recipe);

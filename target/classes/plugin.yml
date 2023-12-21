@@ -1,5 +1,5 @@
 name: OnePerm
-version: '1.8'
+version: '1.9'
 main: com.songro.oneperm.OnePerm
 api-version: '1.20'
 prefix: ONEPERM
@@ -7,7 +7,7 @@ load: STARTUP
 authors: ['DONT PAN!C STUDIOS']
 description: 한개의 플러그인에서 모든 권한을
 website: https://studio.dontpanic.kro.kr/what-we-made-html
-depend: [Citizens, Vault]
+#softdepend: [WorldGuard]
 loadbefore: [Vault, VaultEvents]
 
 commands:
@@ -63,7 +63,7 @@ commands:
     description: 특정 플레이어의 계좌를 초기화합니다.
     aliases: [계좌초기화, rsb, rsbank]
   police:
-    usage: /<command> <채용/확성기/삭제> (플레이어/내용)
+    usage: /<command> <채용/부서/확성기>
     description: 경찰총장이 사용할수 있는 명령어 입니다.
     aliases: [경찰, 경찰청, ㄱㅊ, ㄱㅊㅊ, po, pc]
   treasury:
@@ -84,6 +84,12 @@ commands:
   bankaccept:
     usage: /<command>
     description: 플레이어의 계좌 신청을 승인합니다.
+  rtndbginf:
+    usage: /<command>
+    description: return debugging information
+  send:
+    usage: /<command>
+    description: send command
 
 permissions:
   def.*:

@@ -1,4 +1,4 @@
-package com.songro.oneperm.events;
+package com.songro.oneperm.events.scoreboard;
 
 import com.songro.oneperm.OnePerm;
 import org.bukkit.Bukkit;

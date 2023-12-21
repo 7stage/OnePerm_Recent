@@ -11,12 +11,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.io.IOException;
+
 import static com.songro.oneperm.OnePerm.econ;
 
 public class BankCreationClickEvent implements Listener {
 
     @EventHandler
-    public void onClickInv(InventoryClickEvent e) {
+    public void onClickInv(InventoryClickEvent e) throws IOException {
         if(e.getView().getTitle().equalsIgnoreCase(ChatColor.BOLD + "[ 계좌 신청 승인 ]")) {
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
@@ -25,7 +27,9 @@ public class BankCreationClickEvent implements Listener {
                 if(e.getCurrentItem() != null) {
                     OfflinePlayer t = Bukkit.getOfflinePlayer(e.getCurrentItem().getItemMeta().getDisplayName());
                     OnePerm.plugin.getBankCreateData().set(t.getName() + ".askedcreation", false);
+                    OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
                     p.sendMessage(ChatColor.RED + "[ONEPERM] 거부됨");
+                    p.closeInventory();
                 }
             }
 
@@ -33,7 +37,10 @@ public class BankCreationClickEvent implements Listener {
                 if(e.getCurrentItem() != null) {
                     OfflinePlayer t = Bukkit.getOfflinePlayer(e.getCurrentItem().getItemMeta().getDisplayName());
                     EconomyResponse r = econ.createBank("pbank", t);
+                    OnePerm.plugin.getBankCreateData().set(p.getName() + ".data.iscreated", false);
+                    OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
                     p.sendMessage(ChatColor.GREEN + "[ONEPERM] 생성됨");
+                    p.closeInventory();
                 }
             }
         }

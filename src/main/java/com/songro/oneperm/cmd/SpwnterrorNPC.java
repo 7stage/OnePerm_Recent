@@ -4,6 +4,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +25,7 @@ public class SpwnterrorNPC implements CommandExecutor {
         log.info("[ONEPERM] Citizens Dependecy 불러오는중...");
         try {
             NPCRegistry registry =  CitizensAPI.getNPCRegistry();
-            NPC npc = registry.createNPC(EntityType.PLAYER, "ㅁㄴㅇㄹ테스트");
+            NPC npc = registry.createNPC(EntityType.PLAYER, ChatColor.YELLOW + "[ 테러 NPC ]");
             npc.spawn(playerLocation);
             log.info("[ONEPERM] 불러와짐.");
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.songro.oneperm.events;
+package com.songro.oneperm.events.player;
 
 import com.songro.oneperm.OnePerm;
 import org.bukkit.Bukkit;
@@ -16,6 +16,7 @@ public class ChangePrefixPlayerName implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Logger log = Bukkit.getLogger();
+        //TODO Even tho this function didn't included to main branch but this has to be cleaned up.
 
         // info: should change this function without if
         if(player.hasPermission("role.op")) {

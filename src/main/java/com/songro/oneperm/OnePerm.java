@@ -20,19 +20,27 @@ BY. NOTSONGRO_
  */
 
 import com.songro.oneperm.cmd.*;
-import com.songro.oneperm.cmd.ResetPlayerBank;
+import com.songro.oneperm.cmd.bank.*;
 import com.songro.oneperm.cmd.cmdforcmd.RemoveAllPerm;
 import com.songro.oneperm.cmd.cmdforcmd.StartMafiaTerror;
 import com.songro.oneperm.cmd.cmdforcmd.mafia.StartREALMafiaTerror;
-import com.songro.oneperm.cmd.giveperm.Police;
+import com.songro.oneperm.cmd.debug.ConnectExternServer;
+import com.songro.oneperm.cmd.debug.returndebug;
 import com.songro.oneperm.cmd.gui.CreateBankDataGUI;
 import com.songro.oneperm.cmd.gui.GiveCstItemGUI;
-import com.songro.oneperm.events.*;
+import com.songro.oneperm.cmd.role.CopRoleCommand;
 import com.songro.oneperm.events.gui.BankCreationClickEvent;
 import com.songro.oneperm.events.gui.InventoryClick;
 import com.songro.oneperm.events.item.IfDroppedItemGrenade;
 import com.songro.oneperm.events.item.MarriageRingCheckClick;
-import com.songro.oneperm.events.item.WeedEvent;
+import com.songro.oneperm.events.item.drug.CocaineEvent;
+import com.songro.oneperm.events.item.drug.HeroineEvent;
+import com.songro.oneperm.events.item.drug.WeedEvent;
+import com.songro.oneperm.events.player.CheckBlockDownPlayer;
+import com.songro.oneperm.events.player.CreatePlayerRoleData;
+import com.songro.oneperm.events.player.OnPlayerDeath;
+import com.songro.oneperm.events.player.PlayerJoinQuitEvent;
+import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
 import com.songro.oneperm.recipe.drug.weed;
 import com.songro.oneperm.task.DailyWage;
 import net.milkbowl.vault.economy.Economy;
@@ -46,7 +54,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.cert.Certificate;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -66,8 +73,12 @@ public final class OnePerm extends JavaPlugin {
     public File bankCreationFile;
 
 
-    boolean loadedCommand = false;
-    boolean loadedEvent = false;
+    public boolean loadedCommand = false;
+    public boolean loadedEvent = false;
+    public boolean loadedAll = false;
+    public boolean loadedNationData = false;
+    public boolean loadedBankData = false;
+    public boolean loadedData = false;
 
     public static Economy econ = null;
 
@@ -75,6 +86,7 @@ public final class OnePerm extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         log.info("[ONEPERM] Enabling..");
+        log.severe("[ONEPERM] 개발자 버전을 이용하고 있습니다, 각종 버그및 작업이 되지 않은 기능이 포함되어 있을수도 있습니다.");
 
         if(!setupEconomy()) {
             log.severe("[ONEPERM] Vault dependency(이)가 발견되지 않아. 플러그인을 종료합니다, Vault 플러그인이 있는게 맞나요?");
@@ -106,7 +118,7 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("depositplayer")).setExecutor(new DepositMoney2Player());
             Objects.requireNonNull(getCommand("removemoney")).setExecutor(new RemoveMoney());
             Objects.requireNonNull(getCommand("resetbank")).setExecutor(new ResetPlayerBank());
-            Objects.requireNonNull(getCommand("police")).setExecutor(new Police()); // warn: do not de-comment unless the bug is fixed.
+            Objects.requireNonNull(getCommand("police")).setExecutor(new CopRoleCommand()); // warn: do not de-comment unless the bug is fixed.
             //Objects.requireNonNull(getCommand("chkwarn")).setExecutor(new ChkPlayerWarn()); // warn: this commands were disabled due the admin told to.
             //Objects.requireNonNull(getCommand("warnplayer")).setExecutor(new WarnPlayer()); // warn: same one as before.
             Objects.requireNonNull(getCommand("treasury")).setExecutor(new GetNationMoney());
@@ -114,6 +126,8 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("createbank")).setExecutor(new CreateBank());
             Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo());
             Objects.requireNonNull(getCommand("bankaccept")).setExecutor(new CreateBankDataGUI());
+            Objects.requireNonNull(getCommand("rtndbginf")).setExecutor(new returndebug());
+            Objects.requireNonNull(getCommand("send")).setExecutor(new ConnectExternServer());
             log.info("[ONEPERM] Loaded.");
             loadedCommand = true;
         } catch (Exception e) {
@@ -124,19 +138,22 @@ public final class OnePerm extends JavaPlugin {
         try {
             log.info("[ONEPERM] Loading Events..");
             getServer().getPluginManager().registerEvents(new CheckBlockDownPlayer(), this);
-            getServer().getPluginManager().registerEvents(new ChangePrefixPlayerName(), this);
-            getServer().getPluginManager().registerEvents(new CheckPlayerPermission(), this);
+            //getServer().getPluginManager().registerEvents(new ChangePrefixPlayerName(), this); // info: disabled due to some minor changes to main server skript func.
+            //getServer().getPluginManager().registerEvents(new CheckPlayerPermission(), this); // info: same as up
             getServer().getPluginManager().registerEvents(new InventoryClick(), this);
             getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(), this);
             getServer().getPluginManager().registerEvents(new IfDroppedItemGrenade(), this);
             getServer().getPluginManager().registerEvents(new ScoreBoardJoinEvent(), this);
             getServer().getPluginManager().registerEvents(new MarriageRingCheckClick(), this);
             getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
+            //TODO: WHY THIS DOES NOT WORK FOR MULTIPLE PLAYERS!!!!
             //getServer().getPluginManager().registerEvents(new ScoreBoardLeftEvent(), this); // warn: sidebar has been disabled due to some bugs were occurred.
             getServer().getPluginManager().registerEvents(new CreatePlayerRoleData(), this);
             getServer().getPluginManager().registerEvents(new WeedEvent(), this);
-            getServer().getPluginManager().registerEvents(new ChkPlayerChunkChange(), this);
+            //getServer().getPluginManager().registerEvents(new ChkPlayerChunkChange(), this); // info: this feature is disabled due to some bugs on main server
             getServer().getPluginManager().registerEvents(new BankCreationClickEvent(), this);
+            getServer().getPluginManager().registerEvents(new CocaineEvent(), this);
+            getServer().getPluginManager().registerEvents(new HeroineEvent(), this);
             log.info("[ONEPERM] Loaded.");
             loadedEvent = true;
         } catch (Exception e) {
@@ -165,7 +182,11 @@ public final class OnePerm extends JavaPlugin {
             log.severe(e.getMessage());
         }
 
-        if (loadedCommand && loadedEvent) {
+        if(loadedBankData && loadedNationData && loadedData) {
+            loadedAll = true;
+        }
+
+        if (loadedCommand && loadedEvent && loadedAll) {
             log.info("[ONEPERM] 모든 이벤트가 로드되었습니다.");
             log.info("[ONEPERM] OnePerm - SOE");
         } else {
@@ -207,6 +228,7 @@ public final class OnePerm extends JavaPlugin {
             log.severe(e.getMessage());
             plugin.setEnabled(false);
         }
+        loadedData = true;
     }
 
     public void createWorldData() {
@@ -228,6 +250,7 @@ public final class OnePerm extends JavaPlugin {
             log.severe(e.getMessage());
             plugin.setEnabled(false);
         }
+        loadedNationData = true;
     }
 
     public void createNationData() {
@@ -249,6 +272,7 @@ public final class OnePerm extends JavaPlugin {
             log.severe(e.getMessage());
             plugin.setEnabled(false);
         }
+        loadedNationData = true;
     }
 
     public void createBankCreationData() {
@@ -270,6 +294,7 @@ public final class OnePerm extends JavaPlugin {
             log.severe(e.getMessage());
             plugin.setEnabled(false);
         }
+        loadedBankData = true;
     }
 
     private boolean setupEconomy() {

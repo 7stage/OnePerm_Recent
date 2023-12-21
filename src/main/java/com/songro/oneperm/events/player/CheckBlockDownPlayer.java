@@ -1,4 +1,4 @@
-package com.songro.oneperm.events;
+package com.songro.oneperm.events.player;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

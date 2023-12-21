@@ -1,4 +1,4 @@
-package com.songro.oneperm.cmd;
+package com.songro.oneperm.cmd.bank;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
