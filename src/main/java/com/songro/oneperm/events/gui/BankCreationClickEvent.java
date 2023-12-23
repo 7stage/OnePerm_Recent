@@ -5,6 +5,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,10 +38,15 @@ public class BankCreationClickEvent implements Listener {
                 if(e.getCurrentItem() != null) {
                     OfflinePlayer t = Bukkit.getOfflinePlayer(e.getCurrentItem().getItemMeta().getDisplayName());
                     EconomyResponse r = econ.createBank("pbank", t);
-                    OnePerm.plugin.getBankCreateData().set(p.getName() + ".data.iscreated", false);
-                    OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
-                    p.sendMessage(ChatColor.GREEN + "[ONEPERM] 생성됨");
-                    p.closeInventory();
+                    if(r.transactionSuccess()) {
+                        OnePerm.plugin.getBankCreateData().set(t.getName() + ".data.iscreated", true);
+                        OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
+                        p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 9, 1);
+                        p.sendMessage(ChatColor.GREEN + "[ONEPERM] 생성됨");
+                        p.closeInventory();
+                    } else {
+                        p.sendMessage(ChatColor.RED + "[ONEPERM] " + t.getName() + " 님의 계좌를 생성할수 없어요.");
+                    }
                 }
             }
         }

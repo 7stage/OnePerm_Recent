@@ -26,7 +26,7 @@ public class heroine {
         ArrayList<String> herobineLore = new ArrayList<>();
         herobineLore.add(ChatColor.GOLD + "정신건강에 좋진 않지만, 각성제이기도 하다.");
         herobineLore.add("");
-        herobineLore.add(ChatColor.GOLD + "[ 우클릭 시: 회복 효과 (15초) +  " + ChatColor.GRAY + "???" + ChatColor.GOLD + " ]");
+        herobineLore.add(ChatColor.GOLD + "[ (공중에 보면서) 우클릭 시: 회복 효과 (15초) +  " + ChatColor.GRAY + "???" + ChatColor.GOLD + " ]");
         herobineLore.add(ChatColor.GOLD + "[ 등급: " + ChatColor.RED + "위험" + ChatColor.GOLD + " ]");
 
         herobineMeta.setLore(herobineLore);

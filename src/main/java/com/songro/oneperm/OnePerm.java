@@ -36,18 +36,18 @@ import com.songro.oneperm.events.item.MarriageRingCheckClick;
 import com.songro.oneperm.events.item.drug.CocaineEvent;
 import com.songro.oneperm.events.item.drug.HeroineEvent;
 import com.songro.oneperm.events.item.drug.WeedEvent;
-import com.songro.oneperm.events.player.CheckBlockDownPlayer;
-import com.songro.oneperm.events.player.CreatePlayerRoleData;
-import com.songro.oneperm.events.player.OnPlayerDeath;
-import com.songro.oneperm.events.player.PlayerJoinQuitEvent;
+import com.songro.oneperm.events.player.*;
 import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
 import com.songro.oneperm.recipe.drug.weed;
 import com.songro.oneperm.task.DailyWage;
+import com.songro.oneperm.util.ChannelManager;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -71,6 +71,7 @@ public final class OnePerm extends JavaPlugin {
     public File worlddatafile;
     public File nationDatafile;
     public File bankCreationFile;
+    public ChannelManager channelManager;
 
 
     public boolean loadedCommand = false;
@@ -154,6 +155,7 @@ public final class OnePerm extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new BankCreationClickEvent(), this);
             getServer().getPluginManager().registerEvents(new CocaineEvent(), this);
             getServer().getPluginManager().registerEvents(new HeroineEvent(), this);
+            getServer().getPluginManager().registerEvents(new ChatChannel(), this);
             log.info("[ONEPERM] Loaded.");
             loadedEvent = true;
         } catch (Exception e) {

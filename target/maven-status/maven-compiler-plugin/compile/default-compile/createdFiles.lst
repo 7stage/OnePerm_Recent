@@ -16,6 +16,7 @@ com\songro\oneperm\events\player\CheckPlayerPermission.class
 com\songro\oneperm\events\player\PlayerMoneyDepositEvent.class
 com\songro\oneperm\cmd\WarnPlayer.class
 com\songro\oneperm\cmd\SpwnterrorNPC.class
+com\songro\oneperm\events\player\ChatChannel.class
 com\songro\oneperm\recipe\drug\cocaine.class
 com\songro\oneperm\cmd\debug\ConnectExternServer.class
 com\songro\oneperm\recipe\drug\heroine.class
@@ -35,6 +36,7 @@ com\songro\oneperm\cmd\nonused\TitleMsg.class
 com\songro\oneperm\events\item\drug\CocaineEvent.class
 com\songro\oneperm\cmd\bank\CreateBank.class
 com\songro\oneperm\item\CopBulletProof.class
+com\songro\oneperm\util\ChannelManager.class
 com\songro\oneperm\debug\testingclass.class
 com\songro\oneperm\events\player\CreatePlayerRoleData.class
 com\songro\oneperm\events\gui\InventoryClick.class

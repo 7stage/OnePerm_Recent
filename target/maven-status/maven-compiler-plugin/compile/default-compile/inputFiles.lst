@@ -6,6 +6,7 @@ C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\on
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\item\MarriageRingCheckClick.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\util\RegionHolder.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\item\weapon\Grenade.java
+C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\util\ChannelManager.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\ChkPlayerWarn.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\bank\ResetPlayerBank.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\item\IfDroppedItemC4.java
@@ -56,6 +57,7 @@ C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\on
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\util\CreateItem.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\item\drug\CocaineEvent.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\item\drug\WeedEvent.java
+C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\player\ChatChannel.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\cmdforcmd\StartMafiaTerror.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\ResetWarn.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\debug\returndebug.java

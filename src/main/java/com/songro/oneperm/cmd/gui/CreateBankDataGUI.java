@@ -38,7 +38,7 @@ public class CreateBankDataGUI implements CommandExecutor {
                 il.add(ChatColor.RED + "[ 우클릭 ] : 거부");
                 im.setOwner(plr.getName());
                 im.setLore(il);
-                im.setDisplayName(ChatColor.GOLD + plr.getName());
+                im.setDisplayName(plr.getName());
                 i.setItemMeta(im);
 
                 bankgui.addItem(i);

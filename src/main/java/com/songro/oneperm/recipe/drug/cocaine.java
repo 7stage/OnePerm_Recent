@@ -27,7 +27,7 @@ public class cocaine {
         ArrayList<String> cocaineLore = new ArrayList<>();
         cocaineLore.add(ChatColor.GOLD + "정신건강에 좋진 않지만, 각성제이기도 하다.");
         cocaineLore.add("");
-        cocaineLore.add(ChatColor.GOLD + "[ 우클릭 시: 회복 효과 (15초) +  " + ChatColor.GRAY + "???" + ChatColor.GOLD + " ]");
+        cocaineLore.add(ChatColor.GOLD + "[ (공중에 보면서) 우클릭 시: 회복 효과 (15초) +  " + ChatColor.GRAY + "???" + ChatColor.GOLD + " ]");
         cocaineLore.add(ChatColor.GOLD + "[ 등급: " + ChatColor.RED + "위험" + ChatColor.GOLD + " ]");
 
         cocaineMeta.setLore(cocaineLore);
