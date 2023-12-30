@@ -38,16 +38,16 @@ import com.songro.oneperm.events.item.drug.HeroineEvent;
 import com.songro.oneperm.events.item.drug.WeedEvent;
 import com.songro.oneperm.events.player.*;
 import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
+import com.songro.oneperm.events.scoreboard.ScoreboardSideBarEvent;
+import com.songro.oneperm.recipe.drug.cocaine;
+import com.songro.oneperm.recipe.drug.heroine;
 import com.songro.oneperm.recipe.drug.weed;
 import com.songro.oneperm.task.DailyWage;
-import com.songro.oneperm.util.ChannelManager;
-import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -71,7 +71,6 @@ public final class OnePerm extends JavaPlugin {
     public File worlddatafile;
     public File nationDatafile;
     public File bankCreationFile;
-    public ChannelManager channelManager;
 
 
     public boolean loadedCommand = false;
@@ -145,17 +144,16 @@ public final class OnePerm extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(), this);
             getServer().getPluginManager().registerEvents(new IfDroppedItemGrenade(), this);
             getServer().getPluginManager().registerEvents(new ScoreBoardJoinEvent(), this);
+            getServer().getPluginManager().registerEvents(new ScoreboardSideBarEvent(), this);
             getServer().getPluginManager().registerEvents(new MarriageRingCheckClick(), this);
             getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
-            //TODO: WHY THIS DOES NOT WORK FOR MULTIPLE PLAYERS!!!!
-            //getServer().getPluginManager().registerEvents(new ScoreBoardLeftEvent(), this); // warn: sidebar has been disabled due to some bugs were occurred.
             getServer().getPluginManager().registerEvents(new CreatePlayerRoleData(), this);
             getServer().getPluginManager().registerEvents(new WeedEvent(), this);
             //getServer().getPluginManager().registerEvents(new ChkPlayerChunkChange(), this); // info: this feature is disabled due to some bugs on main server
             getServer().getPluginManager().registerEvents(new BankCreationClickEvent(), this);
             getServer().getPluginManager().registerEvents(new CocaineEvent(), this);
             getServer().getPluginManager().registerEvents(new HeroineEvent(), this);
-            getServer().getPluginManager().registerEvents(new ChatChannel(), this);
+            //getServer().getPluginManager().registerEvents(new ChatChannel(), this);
             log.info("[ONEPERM] Loaded.");
             loadedEvent = true;
         } catch (Exception e) {
@@ -179,6 +177,8 @@ public final class OnePerm extends JavaPlugin {
         try {
             log.info("[ONEPERM] 레시피 등록중..");
             new weed().recipe();
+            new heroine().recipe();
+            new cocaine().recipe();
         } catch (Exception e) {
             log.severe("[ONEPERM] 등록중 오류가 발생했습니다.");
             log.severe(e.getMessage());

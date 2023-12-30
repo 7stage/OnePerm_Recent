@@ -2,6 +2,7 @@ package com.songro.oneperm.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,9 @@ public class ChannelManager {
     public HashMap<Player, String> playerChannel = new HashMap<Player,String>();
 
     /**
-     *  Apply user to join certain text channel.
+     *
+     * @param player Player Object
+     * @param channelName Current player channel name
      */
     public void joinChannel(Player player, String channelName) {
         if(playerChannel.get(player) != null) {
@@ -32,17 +35,24 @@ public class ChannelManager {
     }
 
     /**
-     *  Removes user to join certain text channel.
+     *
+     * @param p Player Object
+     * @param channelName Current Player Channel Name
      */
-    public void leaveChannel(Player p, String channelName) {
+    public void leaveChannel(@NotNull Player p, @NotNull String channelName) {
         ArrayList<Player> plr = channels.get(channelName);
         plr.remove(p);
         channels.put(channelName, plr);
         playerChannel.remove(p);
     }
 
-    public ArrayList<Player> getChannel(Player p) {
-        String channelName = playerChannel.get(p);
+    /**
+     *
+     * @param player Player Object
+     * @return channelName
+     */
+    public ArrayList<Player> getChannel(Player player){
+        String channelName = playerChannel.get(player);
         return channels.get(channelName);
     }
 

@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+
 public class returndebug implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -30,7 +32,24 @@ public class returndebug implements CommandExecutor {
             if (strings.length > 0) {
                 if (strings[0].length() > 0) {
                     p.sendMessage("specfic player uuid: " + Bukkit.getPlayerUniqueId(strings[0]).toString());
+                    if(strings[0].equalsIgnoreCase("serverinfo")) {
+                        long maxMemory = Runtime.getRuntime().maxMemory();
+                        p.sendMessage("---------------------------------\nserver information start");
+                        p.sendMessage("");
+                        p.sendMessage("SERVER OS -> " + System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch"));
+                        p.sendMessage("RAM -> " + Runtime.getRuntime().freeMemory() + "MB / " + (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory) + "MB");
+                        p.sendMessage("TOTAL JVM RAM -> " + Runtime.getRuntime().totalMemory() + "MB");
+                        p.sendMessage("JAVA VER -> " + System.getProperty("java.version"));
+                        p.sendMessage("JAVA HOME DIR -> " + System.getProperty("java.home"));
 
+                        File[] roots = File.listRoots();
+                        for (File root : roots) {
+                            p.sendMessage("ROOT -> " + root.getAbsolutePath());
+                            p.sendMessage("TOTAL SPACE (bytes) -> " + root.getTotalSpace());
+                            p.sendMessage("FREE SPACE (bytes) -> " + root.getFreeSpace());
+                            p.sendMessage("USABLE SPACE (bytes) -> " + root.getUsableSpace());
+                        }
+                    }
                 }
             }
             p.sendMessage("info end.");

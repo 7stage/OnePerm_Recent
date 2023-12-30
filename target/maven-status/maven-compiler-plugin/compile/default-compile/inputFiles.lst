@@ -28,6 +28,7 @@ C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\on
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\nonused\CstbanPlayer.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\gui\BankCreationClickEvent.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\SaveChunkData.java
+C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\scoreboard\ScoreboardSideBarEvent.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\nonused\TitleMsg.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\player\CheckPlayerPermission.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\role\CopRoleCommand.java
@@ -62,4 +63,3 @@ C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\on
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\ResetWarn.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\cmd\debug\returndebug.java
 C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\scoreboard\ScoreBoardJoinEvent.java
-C:\Users\demfi\OneDrive\바탕 화면\Folder\OnePerm\src\main\java\com\songro\oneperm\events\scoreboard\ScoreBoardLeftEvent.java

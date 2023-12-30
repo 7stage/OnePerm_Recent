@@ -52,14 +52,14 @@
       <option name="url" value="https://ci.ender.zone/plugin/repository/everything/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="sonatype-snapshots" />
-      <option name="name" value="sonatype-snapshots" />
-      <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="sk89q-repo" />
       <option name="name" value="sk89q-repo" />
       <option name="url" value="https://maven.enginehub.org/repo/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sonatype-snapshots" />
+      <option name="name" value="sonatype-snapshots" />
+      <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
     </remote-repository>
   </component>
 </project>

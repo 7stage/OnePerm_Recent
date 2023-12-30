@@ -1,9 +1,9 @@
 com\songro\oneperm\cmd\bank\GetNationMoney.class
 com\songro\oneperm\cmd\cmdforcmd\StartMafiaTerror.class
 com\songro\oneperm\cmd\ResetWarn.class
+com\songro\oneperm\events\scoreboard\ScoreboardSideBarEvent.class
 com\songro\oneperm\cmd\bank\RemoveMoney.class
 com\songro\oneperm\cmd\Version.class
-com\songro\oneperm\events\scoreboard\ScoreBoardLeftEvent.class
 com\songro\oneperm\cmd\bank\BankInfo.class
 com\songro\oneperm\events\item\MarriageRingCheckClick.class
 com\songro\oneperm\task\DailyWage.class

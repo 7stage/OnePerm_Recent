@@ -45,7 +45,7 @@ public class BankCreationClickEvent implements Listener {
                         p.sendMessage(ChatColor.GREEN + "[ONEPERM] 생성됨");
                         p.closeInventory();
                     } else {
-                        p.sendMessage(ChatColor.RED + "[ONEPERM] " + t.getName() + " 님의 계좌를 생성할수 없어요.");
+                        p.sendMessage(ChatColor.RED + "[ONEPERM] " + t.getName() + " 님의 계좌를 생성할수 없어요.\n[ONEPERM] 사유: " + r.errorMessage);
                     }
                 }
             }

@@ -4,9 +4,9 @@ import com.jcraft.jsch.*;
 
 public class PANICSSHUtils {
     private final String usrname = "paincapisv";
-    private final String host = "";
-    private final int port = 75;
-    private final String password = "dpstudioapi";
+    private final String host = "39.116.74.205";
+    private final int port = 25565;
+    private final String password = "";
 
     private Session session;
     private ChannelExec execu;
