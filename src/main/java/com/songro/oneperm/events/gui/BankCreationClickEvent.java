@@ -28,6 +28,7 @@ public class BankCreationClickEvent implements Listener {
                 if(e.getCurrentItem() != null) {
                     OfflinePlayer t = Bukkit.getOfflinePlayer(e.getCurrentItem().getItemMeta().getDisplayName());
                     OnePerm.plugin.getBankCreateData().set(t.getName() + ".askedcreation", false);
+                    OnePerm.plugin.getBankCreateData().set(t.getName() + ".data.iscreated", true);
                     OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
                     p.sendMessage(ChatColor.RED + "[ONEPERM] 거부됨");
                     p.closeInventory();
@@ -40,6 +41,7 @@ public class BankCreationClickEvent implements Listener {
                     EconomyResponse r = econ.createBank("pbank", t);
                     if(r.transactionSuccess()) {
                         OnePerm.plugin.getBankCreateData().set(t.getName() + ".data.iscreated", true);
+                        OnePerm.plugin.getBankCreateData().set(t.getName() + ".askedcreation", false);
                         OnePerm.plugin.getBankCreateData().save(OnePerm.plugin.bankCreationFile);
                         p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 9, 1);
                         p.sendMessage(ChatColor.GREEN + "[ONEPERM] 생성됨");
