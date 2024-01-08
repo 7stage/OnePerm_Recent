@@ -3,10 +3,10 @@ package com.songro.oneperm.util;
 import com.jcraft.jsch.*;
 
 public class PANICSSHUtils {
-    private final String usrname = "paincapisv";
-    private final String host = "39.116.74.205";
+    private final String usrname = "songronas";
+    private final String host = "172.30.1.1";
     private final int port = 25565;
-    private final String password = "";
+    private final String password = "songronas";
 
     private Session session;
     private ChannelExec execu;
