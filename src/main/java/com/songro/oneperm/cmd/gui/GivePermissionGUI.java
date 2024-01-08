@@ -1,3 +1,7 @@
+/**
+@deprecated
+*/
+
 package com.songro.oneperm.cmd.gui;
 
 import org.bukkit.Bukkit;
