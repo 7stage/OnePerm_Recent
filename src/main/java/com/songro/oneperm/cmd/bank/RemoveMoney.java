@@ -2,6 +2,10 @@ package com.songro.oneperm.cmd.bank;
 
 // LOL
 
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.model.user.UserManager;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +22,9 @@ public class RemoveMoney implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player)commandSender;
+        LuckPerms api = LuckPermsProvider.get();
+        UserManager userManager = api.getUserManager();
+        User usr = userManager.getUser(player.getName());
 
         if (strings.length == 0) {
             player.sendMessage(ChatColor.YELLOW + "[ONEPERM] 명령어 사용방식이 잘못되었습니다.");
@@ -34,7 +41,7 @@ public class RemoveMoney implements CommandExecutor {
                         player.sendMessage(ChatColor.YELLOW + "[ONEPERM] 존재하지 않는 플레이어거나, 현재 온라인이 아닙니다.");
                     }
 
-                    if (player.hasPermission("role.bank") || player.isOp()) {
+                    if (usr.getPrimaryGroup() == "은행" || player.isOp()) {
                         if (addMoney > 999999999) {
                             player.sendMessage(ChatColor.YELLOW + "[ONEPERM] 값이 너무 큽니다!");
                             return true;

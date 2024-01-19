@@ -1,7 +1,6 @@
 package com.songro.oneperm.cmd.gui;
 
 import com.songro.oneperm.OnePerm;
-import com.songro.oneperm.task.ChkPlayerPerm;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -32,7 +31,6 @@ public class CreateBankDataGUI implements CommandExecutor {
 
                 List<String> il = new ArrayList<>();
                 il.add(ChatColor.GRAY + "- 요청한 날짜: " + OnePerm.plugin.getBankCreateData().getString(plr.getName() + ".data.date"));
-                il.add(ChatColor.GRAY + "- 직업: " + new ChkPlayerPerm().chkperm(plr));
                 il.add("");
                 il.add(ChatColor.GREEN + "[ 좌클릭 ] : 허가");
                 il.add(ChatColor.RED + "[ 우클릭 ] : 거부");

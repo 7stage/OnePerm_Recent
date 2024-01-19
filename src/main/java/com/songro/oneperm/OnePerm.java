@@ -36,13 +36,16 @@ import com.songro.oneperm.events.item.MarriageRingCheckClick;
 import com.songro.oneperm.events.item.drug.CocaineEvent;
 import com.songro.oneperm.events.item.drug.HeroineEvent;
 import com.songro.oneperm.events.item.drug.WeedEvent;
-import com.songro.oneperm.events.player.*;
+import com.songro.oneperm.events.player.CreatePlayerRoleData;
+import com.songro.oneperm.events.player.OnPlayerDeath;
+import com.songro.oneperm.events.player.PlayerJoinQuitEvent;
 import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
-import com.songro.oneperm.events.scoreboard.ScoreboardSideBarEvent;
 import com.songro.oneperm.recipe.drug.cocaine;
 import com.songro.oneperm.recipe.drug.heroine;
 import com.songro.oneperm.recipe.drug.weed;
 import com.songro.oneperm.task.DailyWage;
+import com.songro.oneperm.util.UpdateFromGithub;
+import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -63,6 +66,7 @@ public final class OnePerm extends JavaPlugin {
     Logger log = Bukkit.getLogger();
     public static OnePerm plugin;
 
+    public String ver = "1.9";
     private FileConfiguration config;
     private FileConfiguration worlddata;
     private FileConfiguration nationdata;
@@ -81,12 +85,20 @@ public final class OnePerm extends JavaPlugin {
     public boolean loadedData = false;
 
     public static Economy econ = null;
+    public LuckPerms api;
 
     @Override
     public void onEnable() {
         plugin = this;
         log.info("[ONEPERM] Enabling..");
-        log.severe("[ONEPERM] 개발자 버전을 이용하고 있습니다, 각종 버그및 작업이 되지 않은 기능이 포함되어 있을수도 있습니다.");
+
+        log.info("[ONEPERM] Setup LuckPermsAPI..");
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            log.warning("[ONEPERM] API not set, resetting..");
+            api = provider.getProvider();
+        }
+        log.info("[ONEPERM] Done.");
 
         if(!setupEconomy()) {
             log.severe("[ONEPERM] Vault dependency(이)가 발견되지 않아. 플러그인을 종료합니다, Vault 플러그인이 있는게 맞나요?");
@@ -119,32 +131,31 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("removemoney")).setExecutor(new RemoveMoney());
             Objects.requireNonNull(getCommand("resetbank")).setExecutor(new ResetPlayerBank());
             Objects.requireNonNull(getCommand("police")).setExecutor(new CopRoleCommand()); // warn: do not de-comment unless the bug is fixed.
-            //Objects.requireNonNull(getCommand("chkwarn")).setExecutor(new ChkPlayerWarn()); // warn: this commands were disabled due the admin told to.
-            //Objects.requireNonNull(getCommand("warnplayer")).setExecutor(new WarnPlayer()); // warn: same one as before.
+            Objects.requireNonNull(getCommand("chkwarn")).setExecutor(new ChkPlayerWarn()); // warn: this commands were disabled due the admin told to.
+            Objects.requireNonNull(getCommand("warnplayer")).setExecutor(new WarnPlayer()); // warn: same one as before.
             Objects.requireNonNull(getCommand("treasury")).setExecutor(new GetNationMoney());
             Objects.requireNonNull(getCommand("savechunk")).setExecutor(new SaveChunkData());
-            Objects.requireNonNull(getCommand("createbank")).setExecutor(new CreateBank());
+            //Objects.requireNonNull(getCommand("createbank")).setExecutor(new CreateBank()); // warn: due to bankaccept command has been disabled, this one too.
             Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo());
-            Objects.requireNonNull(getCommand("bankaccept")).setExecutor(new CreateBankDataGUI());
+            //Objects.requireNonNull(getCommand("bankaccept")).setExecutor(new CreateBankDataGUI()); // warn: this command were disabled due to EssentialX Plugin won't accept bank creation.
             Objects.requireNonNull(getCommand("rtndbginf")).setExecutor(new returndebug());
             Objects.requireNonNull(getCommand("send")).setExecutor(new ConnectExternServer());
             log.info("[ONEPERM] Loaded.");
             loadedCommand = true;
         } catch (Exception e) {
             log.severe("명령어 로드중 오류가 발생하였습니다.");
-            log.severe(Arrays.toString(e.getStackTrace()));
+            e.printStackTrace();
         }
 
         try {
             log.info("[ONEPERM] Loading Events..");
-            getServer().getPluginManager().registerEvents(new CheckBlockDownPlayer(), this);
             //getServer().getPluginManager().registerEvents(new ChangePrefixPlayerName(), this); // info: disabled due to some minor changes to main server skript func.
             //getServer().getPluginManager().registerEvents(new CheckPlayerPermission(), this); // info: same as up
             getServer().getPluginManager().registerEvents(new InventoryClick(), this);
             getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(), this);
             getServer().getPluginManager().registerEvents(new IfDroppedItemGrenade(), this);
             getServer().getPluginManager().registerEvents(new ScoreBoardJoinEvent(), this);
-            getServer().getPluginManager().registerEvents(new ScoreboardSideBarEvent(), this);
+            //getServer().getPluginManager().registerEvents(new ScoreboardSideBarEvent(), this); // info: this event has been disabled due to change to skript.
             getServer().getPluginManager().registerEvents(new MarriageRingCheckClick(), this);
             getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
             getServer().getPluginManager().registerEvents(new CreatePlayerRoleData(), this);
@@ -158,7 +169,7 @@ public final class OnePerm extends JavaPlugin {
             loadedEvent = true;
         } catch (Exception e) {
             log.severe("[ONEPERM] 이벤트 로드중 오류가 발생하였습니다.");
-            log.severe(e.getMessage());
+            e.printStackTrace();
         }
 
         try {
@@ -171,7 +182,7 @@ public final class OnePerm extends JavaPlugin {
             }.runTaskTimerAsynchronously(this, 0, 20);
         } catch (Exception e) {
             log.severe("[ONEPERM] 등록중 오류가 발생했습니다.");
-            log.severe(e.getMessage());
+            e.printStackTrace();
         }
 
         try {
@@ -181,8 +192,10 @@ public final class OnePerm extends JavaPlugin {
             new cocaine().recipe();
         } catch (Exception e) {
             log.severe("[ONEPERM] 등록중 오류가 발생했습니다.");
-            log.severe(e.getMessage());
+            e.printStackTrace();
         }
+
+        //new UpdateFromGithub();
 
         if(loadedBankData && loadedNationData && loadedData) {
             loadedAll = true;
@@ -227,7 +240,7 @@ public final class OnePerm extends JavaPlugin {
             config.load(customConfigFile);
         } catch (IOException | InvalidConfigurationException e) {
             log.severe("[ONEPERM] 설정을 불러오는중에 오류가 발생했습니다, 파일이 유효한가요?");
-            log.severe(e.getMessage());
+            e.printStackTrace();
             plugin.setEnabled(false);
         }
         loadedData = true;
@@ -249,7 +262,7 @@ public final class OnePerm extends JavaPlugin {
             worlddata.load(worlddatafile);
         } catch (IOException | InvalidConfigurationException e) {
             log.severe("[ONEPERM] 월드 설정을 불러오는중에 오류가 발생했습니다, 파일이 유효한가요?");
-            log.severe(e.getMessage());
+            e.printStackTrace();
             plugin.setEnabled(false);
         }
         loadedNationData = true;
@@ -271,7 +284,7 @@ public final class OnePerm extends JavaPlugin {
             nationdata.load(nationDatafile);
         } catch (IOException | InvalidConfigurationException e) {
             log.severe("[ONEPERM] 국가 설정을 불러오는중에 오류가 발생했습니다, 파일이 유효한가요?");
-            log.severe(e.getMessage());
+            e.printStackTrace();
             plugin.setEnabled(false);
         }
         loadedNationData = true;
@@ -293,7 +306,7 @@ public final class OnePerm extends JavaPlugin {
             bankcreatedata.load(bankCreationFile);
         } catch (IOException | InvalidConfigurationException e) {
             log.severe("[ONEPERM] 국가 설정을 불러오는중에 오류가 발생했습니다, 파일이 유효한가요?");
-            log.severe(e.getMessage());
+            e.printStackTrace();
             plugin.setEnabled(false);
         }
         loadedBankData = true;
@@ -317,7 +330,7 @@ public final class OnePerm extends JavaPlugin {
             econ = rsp.getProvider();
             return true;
         } catch (Exception e) {
-            log.severe("[ONEPERM] " + e);
+            e.printStackTrace();
             return false;
         }
     }

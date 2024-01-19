@@ -40,10 +40,6 @@ public class Message2Player implements CommandExecutor {
 
             if (commandSender instanceof Player) {
                 try {
-                    if (target != Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(ChatColor.YELLOW + "[ONEPERM] '" + target.getDisplayName() + "' 플레이어는 온라인이 아닙니다.");
-                    }
-
                     try {
                         if (strings.length == 1) {
                             if (target.equals(player)) {

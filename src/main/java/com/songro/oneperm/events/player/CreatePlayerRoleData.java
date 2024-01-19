@@ -21,25 +21,14 @@ public class CreatePlayerRoleData implements Listener {
         if(OnePerm.plugin.getCustomConfig().getConfigurationSection(p.getName()) == null) {
             try {
                 log.warning("[ONEPERM] Player " + p.getName() + " has no data on it, creating it.");
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".cop", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".student", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".mafia", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".fire", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".guide", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".law", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".broadcast", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".prosector", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".cityhall", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".execution", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".election", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".colleage", false);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".bank", false);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.playerWarnStack", 0);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.mailcount", 0);
-                OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.department", "없음");
+                OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.dummy", "dummy");
+                OnePerm.plugin.getCustomConfig().set(p.getName() + ".setting.getMailFromPlayer", true);
+                OnePerm.plugin.getCustomConfig().set(p.getName() + ".setting.getNotificationFromPlugin", true);
                 OnePerm.plugin.getCustomConfig().save(OnePerm.plugin.customConfigFile);
             } catch (IOException er) {
-                p.sendMessage(ChatColor.RED + "CRITICAL: COULDN'T SAVE FILE CAUSE OF: IOEXCEPTION OCCURRED\nCRITICAL: CAUSED PLUGIN: OnePerm\nCRITICAL: " + er.getLocalizedMessage());
+                p.sendMessage(ChatColor.RED + "CRITICAL: COULDN'T SAVE FILE CAUSE OF: IOEXCEPTION OCCURRED\nCRITICAL: " + er.getLocalizedMessage());
             }
         } else {
             log.info("[ONEPERM] player " + p.getName() + " has data on it, ignoring.");

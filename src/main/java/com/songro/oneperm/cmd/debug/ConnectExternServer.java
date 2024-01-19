@@ -1,8 +1,5 @@
 package com.songro.oneperm.cmd.debug;
 
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.songro.oneperm.util.PANICSSHUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -34,7 +31,7 @@ public class ConnectExternServer implements CommandExecutor {
                 p.sendMessage("returning information.");
                 if (strings.length != 0) {
                     try {
-                        new PANICSSHUtils().command(strings[1]);
+                        //TODO: DO NOT ADD ANYTHING HERE
                     } catch (Exception e) {
                         p.sendMessage(ChatColor.RED + "ERROR: " + e.getMessage());
                     }

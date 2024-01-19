@@ -16,23 +16,18 @@ public class WarnPlayer implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player p = (Player) commandSender;
-        Logger log = Bukkit.getLogger();
 
-        if(strings.length == 2) {
+        if(strings.length == 1) {
             Player t = Bukkit.getPlayer(strings[0]);
 
             try {
                 assert t != null;
-                if (Objects.requireNonNull(OnePerm.plugin.getCustomConfig().getConfigurationSection(t.getName() + ".data")).getInt("playerWarnStack") > 3) {
-                    p.sendMessage(ChatColor.GOLD + "[ONEPERM] " + ChatColor.WHITE + "해당 플레이어는 경고 횟수가 이미 3번 이상입니다.");
-                } else {
-                    try {
+                try {
                         Objects.requireNonNull(OnePerm.plugin.getCustomConfig().getConfigurationSection(t.getName() + ".data")).set("playerWarnStack", Objects.requireNonNull(OnePerm.plugin.getCustomConfig().getConfigurationSection(t.getName() + ".data")).getInt("playerWarnStack") + 1);
+                        OnePerm.plugin.getCustomConfig().save(OnePerm.plugin.customConfigFile);
                         p.sendMessage(ChatColor.GOLD + "[ONEPERM] " + ChatColor.WHITE + t.getName() + "님의 경고 횟수가 증가 하였습니다.");
-                    } catch (NullPointerException e) {
-                        p.sendMessage(ChatColor.GOLD + "[ONEPERM] " + ChatColor.WHITE + "해당 플레이어의 데이터가 존재하지 않습니다.");
-                        log.severe(e.getMessage());
-                    }
+                } catch (NullPointerException e) {
+                    p.sendMessage(ChatColor.GOLD + "[ONEPERM] " + ChatColor.WHITE + "해당 플레이어의 데이터가 존재하지 않습니다.\n[ONEPERM] " + e.getMessage());
                 }
             } catch (Exception e) {
                 p.sendMessage(ChatColor.RED + "[ONEPERM] 오류가 발생했습니다.\n[ONEPERM] " + e.getMessage());
