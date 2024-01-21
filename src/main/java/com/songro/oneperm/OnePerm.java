@@ -136,7 +136,7 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("treasury")).setExecutor(new GetNationMoney());
             Objects.requireNonNull(getCommand("savechunk")).setExecutor(new SaveChunkData());
             //Objects.requireNonNull(getCommand("createbank")).setExecutor(new CreateBank()); // warn: due to bankaccept command has been disabled, this one too.
-            Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo());
+            //Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo()); // warn: this command re-used? in sideboard, do not remove this comment if its needed.
             //Objects.requireNonNull(getCommand("bankaccept")).setExecutor(new CreateBankDataGUI()); // warn: this command were disabled due to EssentialX Plugin won't accept bank creation.
             Objects.requireNonNull(getCommand("rtndbginf")).setExecutor(new returndebug());
             Objects.requireNonNull(getCommand("send")).setExecutor(new ConnectExternServer());
