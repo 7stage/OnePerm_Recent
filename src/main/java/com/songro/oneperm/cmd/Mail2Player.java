@@ -19,7 +19,7 @@ public class Mail2Player implements CommandExecutor {
                 Player t = Bukkit.getPlayer(strings[0]);
 
                 if(OnePerm.plugin.getCustomConfig().getBoolean(t.getName() + ".setting.getMailFromPlayer")) {
-                    p.sendMessage(ChatColor.GREEN + "[ONEPERM] " + t.getName() + "님에게 메일을 보냈습니다.");
+
                 } else {
                     p.sendMessage(ChatColor.YELLOW + "[ONEPERM] 해당 플레이어는 메일을 받지 않기로 했습니다.");
                 }

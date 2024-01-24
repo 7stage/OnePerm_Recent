@@ -17,6 +17,10 @@ BY. NOTSONGRO_
        - 모든 코드는 GPL-3.0 License 의 라이선스를 따릅니다.
        - 수정을 허가하되, 소스코드로 배포시 모든 저작권및 라이선스 정보를 유지및 수정 사항에 대한 고지 포함.
        - 또는, 바이너리 형태로 배포시 오픈소스 고지문 작성및 프로그램과 같이 동봉, 수정 사항에 대한 고지 포함 필요.
+
+    이러한 점 정말로 죄송해요:
+       - 코드가 생각보다 스파게티 형식입니다, 처음 소스코드를 봤을때 뭐가 어디로 연결되는지 이해가 잘 안되실꺼에요.
+       - 대부분의 코드는 야매로(?) 만들어졌습니다, 자세한 내용은 
  */
 
 import com.songro.oneperm.cmd.*;
@@ -25,10 +29,9 @@ import com.songro.oneperm.cmd.cmdforcmd.RemoveAllPerm;
 import com.songro.oneperm.cmd.cmdforcmd.StartMafiaTerror;
 import com.songro.oneperm.cmd.cmdforcmd.mafia.StartREALMafiaTerror;
 import com.songro.oneperm.cmd.debug.ConnectExternServer;
+import com.songro.oneperm.cmd.debug.GetGroupFromPlayer;
 import com.songro.oneperm.cmd.debug.returndebug;
-import com.songro.oneperm.cmd.gui.CreateBankDataGUI;
 import com.songro.oneperm.cmd.gui.GiveCstItemGUI;
-import com.songro.oneperm.cmd.role.CopRoleCommand;
 import com.songro.oneperm.events.gui.BankCreationClickEvent;
 import com.songro.oneperm.events.gui.InventoryClick;
 import com.songro.oneperm.events.item.IfDroppedItemGrenade;
@@ -43,6 +46,7 @@ import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
 import com.songro.oneperm.recipe.drug.cocaine;
 import com.songro.oneperm.recipe.drug.heroine;
 import com.songro.oneperm.recipe.drug.weed;
+import com.songro.oneperm.role.fisher.event.OnFishing;
 import com.songro.oneperm.task.DailyWage;
 import com.songro.oneperm.util.UpdateFromGithub;
 import net.luckperms.api.LuckPerms;
@@ -57,7 +61,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -66,7 +69,7 @@ public final class OnePerm extends JavaPlugin {
     Logger log = Bukkit.getLogger();
     public static OnePerm plugin;
 
-    public String ver = "1.9";
+    public String ver = "2.0";
     private FileConfiguration config;
     private FileConfiguration worlddata;
     private FileConfiguration nationdata;
@@ -130,16 +133,16 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("depositplayer")).setExecutor(new DepositMoney2Player());
             Objects.requireNonNull(getCommand("removemoney")).setExecutor(new RemoveMoney());
             Objects.requireNonNull(getCommand("resetbank")).setExecutor(new ResetPlayerBank());
-            Objects.requireNonNull(getCommand("police")).setExecutor(new CopRoleCommand()); // warn: do not de-comment unless the bug is fixed.
-            Objects.requireNonNull(getCommand("chkwarn")).setExecutor(new ChkPlayerWarn()); // warn: this commands were disabled due the admin told to.
+            Objects.requireNonNull(getCommand("chkwarn")).setExecutor(new ChkPlayerWarn()); // warn: these commands were disabled due the admin told to.
             Objects.requireNonNull(getCommand("warnplayer")).setExecutor(new WarnPlayer()); // warn: same one as before.
             Objects.requireNonNull(getCommand("treasury")).setExecutor(new GetNationMoney());
             Objects.requireNonNull(getCommand("savechunk")).setExecutor(new SaveChunkData());
             //Objects.requireNonNull(getCommand("createbank")).setExecutor(new CreateBank()); // warn: due to bankaccept command has been disabled, this one too.
-            //Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo()); // warn: this command re-used? in sideboard, do not remove this comment if its needed.
+            Objects.requireNonNull(getCommand("bankinfo")).setExecutor(new BankInfo());
             //Objects.requireNonNull(getCommand("bankaccept")).setExecutor(new CreateBankDataGUI()); // warn: this command were disabled due to EssentialX Plugin won't accept bank creation.
             Objects.requireNonNull(getCommand("rtndbginf")).setExecutor(new returndebug());
             Objects.requireNonNull(getCommand("send")).setExecutor(new ConnectExternServer());
+            Objects.requireNonNull(getCommand("rtngroup")).setExecutor(new GetGroupFromPlayer());
             log.info("[ONEPERM] Loaded.");
             loadedCommand = true;
         } catch (Exception e) {
@@ -164,7 +167,7 @@ public final class OnePerm extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new BankCreationClickEvent(), this);
             getServer().getPluginManager().registerEvents(new CocaineEvent(), this);
             getServer().getPluginManager().registerEvents(new HeroineEvent(), this);
-            //getServer().getPluginManager().registerEvents(new ChatChannel(), this);
+            getServer().getPluginManager().registerEvents(new OnFishing(), this);
             log.info("[ONEPERM] Loaded.");
             loadedEvent = true;
         } catch (Exception e) {

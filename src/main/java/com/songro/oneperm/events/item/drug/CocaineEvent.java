@@ -19,7 +19,7 @@ public class CocaineEvent implements Listener {
         ItemStack holdingItem = p.getInventory().getItemInMainHand();
 
         if(e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if(p.getItemInHand() != null) {
+            if(p.getItemInHand() != null && p.getItemInUse() != null) {
                 if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.RED + "[ 코케인 ]") && p.getItemInHand().getItemMeta() != null) {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 20 * 15, 0), true);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 1), true);

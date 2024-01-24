@@ -24,6 +24,7 @@ public class CreatePlayerRoleData implements Listener {
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.playerWarnStack", 0);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.mailcount", 0);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.dummy", "dummy");
+                OnePerm.plugin.getCustomConfig().set(p.getName() + ".data.failedAttempt", 0);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".setting.getMailFromPlayer", true);
                 OnePerm.plugin.getCustomConfig().set(p.getName() + ".setting.getNotificationFromPlugin", true);
                 OnePerm.plugin.getCustomConfig().save(OnePerm.plugin.customConfigFile);

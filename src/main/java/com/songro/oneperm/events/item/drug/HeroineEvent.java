@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -20,7 +19,7 @@ public class HeroineEvent implements Listener {
         ItemStack holdingItem = p.getInventory().getItemInMainHand();
 
         if(e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if(p.getItemInHand() != null) {
+            if(p.getItemInHand() != null && p.getItemInUse() != null) {
                 if (p.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.RED + "[ 히로빈 ]") && p.getItemInHand().getItemMeta() != null) {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 15, 0), true);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 1), true);
@@ -35,8 +34,6 @@ public class HeroineEvent implements Listener {
                     holdingItem.setAmount(holdingItem.getAmount() - 1);
                 }
             }
-        } else {
-            return;
         }
     }
 }
