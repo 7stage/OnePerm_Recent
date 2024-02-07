@@ -28,6 +28,8 @@ public class returndebug implements CommandExecutor {
             p.sendMessage("did world data load? -> " + OnePerm.plugin.loadedNationData);
             p.sendMessage("did all configuration load? -> " + OnePerm.plugin.loadedAll);
             p.sendMessage("check luckperms api -> " + OnePerm.plugin.api.getUserManager().isLoaded(p.getUniqueId()));
+            p.sendMessage("builddate: 20240207");
+            p.sendMessage("recent traceback: \n" + Arrays.toString(Thread.currentThread().getStackTrace()));
             if (strings.length > 0) {
                 if (strings[0].length() > 0) {
                     long maxMemory = Runtime.getRuntime().maxMemory();
@@ -48,8 +50,6 @@ public class returndebug implements CommandExecutor {
                     }
                 }
             }
-            p.sendMessage("builddate: 20240207");
-            p.sendMessage("recent traceback: \n" + Arrays.toString(Thread.currentThread().getStackTrace()));
         }
             p.sendMessage("info end.");
 
