@@ -18,7 +18,7 @@ public class GetGroupFromPlayer implements CommandExecutor {
         User usrAPI = api.getUserManager().getUser(p.getName());
 
         assert usrAPI != null;
-        p.sendMessage("usr prim group" + usrAPI.getPrimaryGroup());
+        p.sendMessage("usr prim group -> " + usrAPI.getPrimaryGroup());
 
         return true;
     }

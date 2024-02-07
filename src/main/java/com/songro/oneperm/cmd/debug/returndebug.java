@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class returndebug implements CommandExecutor {
     @Override
@@ -26,6 +27,7 @@ public class returndebug implements CommandExecutor {
             p.sendMessage("did nation data load? -> " + OnePerm.plugin.loadedNationData);
             p.sendMessage("did world data load? -> " + OnePerm.plugin.loadedNationData);
             p.sendMessage("did all configuration load? -> " + OnePerm.plugin.loadedAll);
+            p.sendMessage("check luckperms api -> " + OnePerm.plugin.api.getUserManager().isLoaded(p.getUniqueId()));
             if (strings.length > 0) {
                 if (strings[0].length() > 0) {
                     long maxMemory = Runtime.getRuntime().maxMemory();
@@ -46,6 +48,8 @@ public class returndebug implements CommandExecutor {
                     }
                 }
             }
+            p.sendMessage("builddate: 20240207");
+            p.sendMessage("recent traceback: \n" + Arrays.toString(Thread.currentThread().getStackTrace()));
         }
             p.sendMessage("info end.");
 

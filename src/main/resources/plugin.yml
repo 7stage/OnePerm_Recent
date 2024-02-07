@@ -82,9 +82,10 @@ commands:
     usage: /<command>
     description: 계좌 정보를 표시합니다.
     aliases: [계좌, 계좌정보, bi]
-  #bankaccept:
-  #  usage: /<command>
-  #  description: 플레이어의 계좌 신청을 승인합니다.
+  sellfish:
+    usage: /<command>
+    description: 손에 들고 있는 물고기를 팝니다.
+    aliases: [sf, 물고기팔기, sellf, sfish, sfsh]
   rtndbginf:
     usage: /<command>
     description: return debugging information

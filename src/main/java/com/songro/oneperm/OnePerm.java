@@ -20,7 +20,7 @@ BY. NOTSONGRO_
 
     이러한 점 정말로 죄송해요:
        - 코드가 생각보다 스파게티 형식입니다, 처음 소스코드를 봤을때 뭐가 어디로 연결되는지 이해가 잘 안되실꺼에요.
-       - 대부분의 코드는 야매로(?) 만들어졌습니다, 자세한 내용은 
+       - 대부분의 코드는 야매로(?) 만들어졌습니다
  */
 
 import com.songro.oneperm.cmd.*;
@@ -46,9 +46,11 @@ import com.songro.oneperm.events.scoreboard.ScoreBoardJoinEvent;
 import com.songro.oneperm.recipe.drug.cocaine;
 import com.songro.oneperm.recipe.drug.heroine;
 import com.songro.oneperm.recipe.drug.weed;
+import com.songro.oneperm.role.fisher.cmd.SellFish;
 import com.songro.oneperm.role.fisher.event.OnFishing;
+import com.songro.oneperm.role.fisher.event.SetFishItem;
+import com.songro.oneperm.role.robbery.event.StealRandomItemFromPlayer;
 import com.songro.oneperm.task.DailyWage;
-import com.songro.oneperm.util.UpdateFromGithub;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -143,6 +145,7 @@ public final class OnePerm extends JavaPlugin {
             Objects.requireNonNull(getCommand("rtndbginf")).setExecutor(new returndebug());
             Objects.requireNonNull(getCommand("send")).setExecutor(new ConnectExternServer());
             Objects.requireNonNull(getCommand("rtngroup")).setExecutor(new GetGroupFromPlayer());
+            Objects.requireNonNull(getCommand("sellfish")).setExecutor(new SellFish());
             log.info("[ONEPERM] Loaded.");
             loadedCommand = true;
         } catch (Exception e) {
@@ -168,6 +171,8 @@ public final class OnePerm extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new CocaineEvent(), this);
             getServer().getPluginManager().registerEvents(new HeroineEvent(), this);
             getServer().getPluginManager().registerEvents(new OnFishing(), this);
+            getServer().getPluginManager().registerEvents(new SetFishItem(), this);
+            getServer().getPluginManager().registerEvents(new StealRandomItemFromPlayer(), this);
             log.info("[ONEPERM] Loaded.");
             loadedEvent = true;
         } catch (Exception e) {
