@@ -97,6 +97,18 @@ public final class OnePerm extends JavaPlugin {
         plugin = this;
         log.info("[ONEPERM] Enabling..");
 
+        log.info("[ONEPERM] Setup LuckPermsAPI..");
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            log.warning("[ONEPERM] API not set, resetting..");
+            api = provider.getProvider();
+        } else {
+            log.severe("[ONEPERM] Cannot find LuckPerms API Provider, disabling..");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        log.info("[ONEPERM] Done.");
+
         if(!setupEconomy()) {
             log.severe("[ONEPERM] Vault dependency(이)가 발견되지 않아. 플러그인을 종료합니다, Vault 플러그인이 있는게 맞나요?");
             getServer().getPluginManager().disablePlugin(this);
