@@ -14,7 +14,7 @@ public class GetGroupFromPlayer implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player p = (Player)commandSender;
-        LuckPerms api = OnePerm.plugin.api;
+        LuckPerms api = LuckPermsProvider.get();
         User usrAPI = api.getUserManager().getUser(p.getName());
 
         assert usrAPI != null;

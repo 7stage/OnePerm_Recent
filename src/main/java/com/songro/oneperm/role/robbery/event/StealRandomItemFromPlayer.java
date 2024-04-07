@@ -26,7 +26,7 @@ public class StealRandomItemFromPlayer implements Listener {
         User usr = api.getUserManager().getUser(p.getUniqueId());
 
         if(api != null) {
-            if (e.isSneaking() && p.isHandRaised()) { // sneaking & punching
+            if (e.isSneaking()) { // sneaking & punching
                 assert usr != null;
 
                 if (usr.getPrimaryGroup().equals("강도") || p.isOp()) {
@@ -56,7 +56,7 @@ public class StealRandomItemFromPlayer implements Listener {
                 }
             }
         } else {
-            OnePerm.plugin.getLogger().info("[ONEPERM] Cannot find ");
+            OnePerm.plugin.getLogger().info("[ONEPERM] Cannot find LuckPerms API Provider");
             Bukkit.broadcast(Component.text(ChatColor.RED + "[ONEPERM] Cannot find LuckPerms API Provider."));
         }
     }
